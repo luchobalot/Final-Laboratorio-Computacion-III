@@ -1,1 +1,5 @@
+ar\edu\utn\frbb\tup\controllers\dto\ClienteDto.class
 ar\edu\utn\frbb\tup\FinalLaboratorio3Application.class
+ar\edu\utn\frbb\tup\models\Persona.class
+ar\edu\utn\frbb\tup\models\Cliente.class
+ar\edu\utn\frbb\tup\controllers\dto\PersonaDto.class
