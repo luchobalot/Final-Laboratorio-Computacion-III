@@ -23,5 +23,58 @@ public class Cliente extends Persona {
             this.fechaAlta = LocalDate.now();
             this.cuentas = new HashSet<>();
         }
+
+        public Cliente(){
+            super();
+            this.cuentas = new HashSet<>();
+        }
+    
+        public Cliente(String nombre, String apellido, long dni, LocalDate fechaNacimiento, String mail, String telefono, String tipo){
+            super(nombre, apellido, dni, fechaNacimiento, mail, telefono);
+            if (tipo.equalsIgnoreCase("F") || tipo.equalsIgnoreCase("FISICA")){
+                this.tipo = TipoCliente.PERSONA_FISICA;
+            }else{
+                this.tipo = TipoCliente.PERSONA_JURIDICA;
+            }
+            this.banco = "Banco ISBC";
+            this.fechaAlta = LocalDate.now();
+            this.cuentas = new HashSet<>();
+        }
+    
+        public TipoCliente getTipo() {
+            return tipo;
+        }
+        public void setTipo(TipoCliente tipo) {
+            this.tipo = tipo;
+        }
+    
+        public String getBanco() {
+            return banco;
+        }
+    
+        public LocalDate getFechaAlta() {
+            return fechaAlta;
+        }
+        public void setFechaAlta(LocalDate fechaAlta) {
+            this.fechaAlta = fechaAlta;
+        }
+    
+        public Set<CuentaBancaria> getCuentas() {
+            return cuentas;
+        }
+        public void addCuentas(CuentaBancaria cuenta){ 
+            this.cuentas.add(cuenta);
+        }
+        
+        public void deleteCuenta(CuentaBancaria cuenta){ 
+            for (CuentaBancaria c : this.cuentas){
+                if (c.getIdCuenta() == cuenta.getIdCuenta()){
+                    this.cuentas.remove(c);
+                }
+            }
+        }
+        public void setCuentas(Set<CuentaBancaria> cuentas) {
+            this.cuentas = cuentas;
+        }
       
 }
