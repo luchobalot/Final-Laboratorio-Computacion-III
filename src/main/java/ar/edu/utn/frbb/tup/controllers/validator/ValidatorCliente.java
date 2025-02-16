@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import ar.edu.utn.frbb.tup.controllers.dto.ClienteDto;
 import ar.edu.utn.frbb.tup.models.exceptions.DataNoValidException;
+import ar.edu.utn.frbb.tup.models.exceptions.EdadNoValidaException;
 
 @Component
 public class ValidatorCliente {
@@ -37,16 +38,15 @@ public class ValidatorCliente {
     }
 
     // Validación de fecha de nacimiento
-    private void validateFechaNacimiento(LocalDate fechaNacimiento) throws DataNoValidException {
-      LocalDate fechaMinima = LocalDate.now().minusYears(18); // Fecha mínima para ser mayor de edad
-      if (fechaNacimiento.isAfter(LocalDate.now())) {
-          throw new DataNoValidException("La fecha de nacimiento no puede ser posterior a la fecha actual");
-      } else if (fechaNacimiento.isAfter(fechaMinima)) {
-          throw new DataNoValidException("Error: Usted no puede ser menor de edad.");
-      }
-  }
+    private void validateFechaNacimiento(LocalDate fechaNacimiento) throws EdadNoValidaException {
+        LocalDate fechaMinima = LocalDate.now().minusYears(18); // Fecha mínima para ser mayor de edad
+        if (fechaNacimiento.isAfter(LocalDate.now())) {
+            throw new EdadNoValidaException("La fecha de nacimiento no puede ser posterior a la fecha actual");
+        } else if (fechaNacimiento.isAfter(fechaMinima)) {
+            throw new EdadNoValidaException("Error: Usted no puede ser menor de edad.");
+        }
+    }
   
-
     // Validación de mail
     private void validateMail(String mail) throws DataNoValidException{
         if (!mail.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {

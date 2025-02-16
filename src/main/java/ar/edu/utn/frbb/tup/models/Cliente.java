@@ -47,8 +47,7 @@ public class Cliente extends Persona {
         public void setTipo(TipoCliente tipo) {
             this.tipo = tipo;
         }
-    
-        public String getBanco() {
+             public String getBanco() {
             return banco;
         }
     
