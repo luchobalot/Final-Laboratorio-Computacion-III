@@ -1,0 +1,65 @@
+{
+      "transferencias": [
+        {
+          "cuentaOrigen": 1001001,
+          "cuentaDestino": 1001002,
+          "monto": 15000.0,
+          "moneda": "PESOS_ARG",
+          "fechaHora": "2024-04-05",
+          "comision": 0.0
+        },
+        {
+          "cuentaOrigen": 1001002,
+          "cuentaDestino": 1001001,
+          "monto": 5000.0,
+          "moneda": "PESOS_ARG",
+          "fechaHora": "2024-04-10",
+          "comision": 0.0
+        },
+        {
+          "cuentaOrigen": 1001003,
+          "cuentaDestino": 9876543,
+          "monto": 500.0,
+          "moneda": "DOLARES",
+          "fechaHora": "2024-04-12",
+          "comision": 2.5
+        }
+      ],
+      "transacciones": [
+        {
+          "idCuenta": 1001001,
+          "fecha": "2024-04-10",
+          "tipo": "DEBITO",
+          "descripcion": "Compra supermercado",
+          "monto": 5000.0
+        },
+        {
+          "idCuenta": 1001001,
+          "fecha": "2024-04-12",
+          "tipo": "CREDITO",
+          "descripcion": "Devolución producto",
+          "monto": 1200.0
+        },
+        {
+          "idCuenta": 1001002,
+          "fecha": "2024-04-15",
+          "tipo": "DEBITO",
+          "descripcion": "Pago servicio luz",
+          "monto": 3800.0
+        }
+      ],
+      "ejemplosParaTestear": {
+        "transferencia": {
+          "cuentaOrigen": 1001001,
+          "cuentaDestino": 1001002,
+          "monto": 10000.0,
+          "moneda": "ARS"
+        },
+        "transaccion": {
+          "idCuenta": 1001001,
+          "tipo": "DEBITO",
+          "descripcion": "Compra en línea",
+          "monto": 2500.0
+        }
+      }
+    }
