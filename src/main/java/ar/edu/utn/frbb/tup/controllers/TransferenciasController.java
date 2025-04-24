@@ -51,7 +51,6 @@ public class TransferenciasController {
         }
     }
     
-    // Método alternativo para el endpoint según la consigna
     @PostMapping
     public ResponseEntity<?> crearTransferencia(@Valid @RequestBody TransferenciasDto transferenciasDto) {
         try {
