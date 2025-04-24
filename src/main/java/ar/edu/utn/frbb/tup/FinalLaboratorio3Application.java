@@ -7,6 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FinalLaboratorio3Application {
     public static void main(String[] args) {
         SpringApplication.run(FinalLaboratorio3Application.class, args);
-        System.out.println("Prueba inicial OK.");
+        System.out.println("Inicio de la aplicación correctamente");
     }
 }
