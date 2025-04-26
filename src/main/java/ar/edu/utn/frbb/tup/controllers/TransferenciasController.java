@@ -36,12 +36,11 @@ public class TransferenciasController {
         return ResponseEntity.ok(transferencias);
     }
     
-    // Endpoint según consigna del trabajo final
     @PostMapping("/api/transfer")
     public ResponseEntity<?> realizarTransferencia(@Valid @RequestBody TransferenciasDto transferenciasDto) {
         try {
             Recibo recibo = transferenciasService.crearTransferencia(transferenciasDto);
-            return ResponseEntity.ok(recibo);
+            return ResponseEntity.status(HttpStatus.CREATED).body(recibo);
         } catch (CuentasIgualesException | MontoNoValidoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (CuentaNoExisteException | ClienteNoExisteException e) {
@@ -55,7 +54,7 @@ public class TransferenciasController {
     public ResponseEntity<?> crearTransferencia(@Valid @RequestBody TransferenciasDto transferenciasDto) {
         try {
             Recibo recibo = transferenciasService.crearTransferencia(transferenciasDto);
-            return ResponseEntity.ok(recibo);
+            return ResponseEntity.status(HttpStatus.CREATED).body(recibo);
         } catch (CuentasIgualesException | MontoNoValidoException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (CuentaNoExisteException | ClienteNoExisteException e) {

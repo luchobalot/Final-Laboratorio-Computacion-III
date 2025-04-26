@@ -51,7 +51,6 @@ public class ClienteServiceTest {
 
     @Test
     public void testObtenerAllClientes() {
-        //Test para ver si invoca al metodo getAllClientes de la clase de persistencia
         List<Cliente> expectedClientes = Arrays.asList(new Cliente(), new Cliente());
         when(clienteDao.getAllClientes()).thenReturn(expectedClientes);
 
@@ -63,7 +62,6 @@ public class ClienteServiceTest {
 
     @Test
     public void testObtenerClienteExistente() throws ClienteNoExisteException {
-        //Test para ver si invoca al metodo getCliente de la clase de persistencia
         Cliente expectedCliente = new Cliente();
         when(clienteDao.getCliente(12345678L)).thenReturn(expectedCliente);
 
@@ -75,8 +73,7 @@ public class ClienteServiceTest {
 
     @Test
     public void testObtenerClienteNoExistente() throws ClienteNoExisteException {
-        //Test para ver que invoque al metodo getCliente de la clase de persistencia y de la exception
-        when(clienteDao.getCliente(12345678L)).thenThrow(new ClienteNoExisteException("Cliente no existe"));
+        when(clienteDao.getCliente(12345678L)).thenThrow(new ClienteNoExisteException("Cliente no existe."));
 
         assertThrows(ClienteNoExisteException.class, () -> clienteService.obtenerCliente(12345678L));
         verify(clienteDao, times(1)).getCliente(12345678L);
@@ -88,10 +85,10 @@ public class ClienteServiceTest {
         ClienteDto clienteDto = new ClienteDto();
         clienteDto.setFechaNacimiento(LocalDate.of(2000, 1, 1));
         clienteDto.setDni(12345678L);
-        clienteDto.setTipo("F");
-        clienteDto.setNombre("Agustin");
-        clienteDto.setApellido("Puente");
-        clienteDto.setMail("a@a.com");
+        clienteDto.setTipo("M");
+        clienteDto.setNombre("Luciano");
+        clienteDto.setApellido("Balot");
+        clienteDto.setMail("luchobalot@gmail.com");
         clienteDto.setTelefono("123456789");
 
         Cliente expectedCliente = new Cliente(clienteDto);
@@ -105,7 +102,6 @@ public class ClienteServiceTest {
 
     @Test
     public void testCrearClienteEdadNoValida() throws ClienteAlreadyExistsException {
-        //Test para ver que no cree cliente menor
         ClienteDto clienteDto = new ClienteDto();
         clienteDto.setFechaNacimiento(LocalDate.now().minusYears(17));
 
@@ -115,14 +111,13 @@ public class ClienteServiceTest {
 
     @Test
     public void testActualizarCliente() throws ClienteNoExisteException, EdadNoValidaException {
-        //Test para ver si actualiza cliente
         ClienteDto clienteDto = new ClienteDto();
         clienteDto.setFechaNacimiento(LocalDate.of(2000, 1, 1));
         clienteDto.setDni(12345678L);
-        clienteDto.setTipo("F");
-        clienteDto.setNombre("Agustin");
-        clienteDto.setApellido("Puente");
-        clienteDto.setMail("a@a.com");
+        clienteDto.setTipo("M");
+        clienteDto.setNombre("Nicolas");
+        clienteDto.setApellido("Balot");
+        clienteDto.setMail("nicobalot@gmail.com");
         clienteDto.setTelefono("123456789");
 
         Cliente expectedCliente = new Cliente(clienteDto);
@@ -137,15 +132,15 @@ public class ClienteServiceTest {
 
     @Test
     public void testBorrarCliente() throws ClienteNoExisteException, CuentaNoExisteException {
-        //Test para ver si borra cliente
-        ClienteDto clienteDto = new ClienteDto();
-        clienteDto.setFechaNacimiento(LocalDate.of(2000, 1, 1));
-        clienteDto.setDni(12345678L);
-        clienteDto.setTipo("F");
-        clienteDto.setNombre("Agustin");
-        clienteDto.setApellido("Puente");
-        clienteDto.setMail("a@a.com");
-        clienteDto.setTelefono("123456789");
+      ClienteDto clienteDto = new ClienteDto();
+      clienteDto.setFechaNacimiento(LocalDate.of(2000, 1, 1));
+      clienteDto.setDni(12345678L);
+      clienteDto.setTipo("M");
+      clienteDto.setNombre("Nicolas");
+      clienteDto.setApellido("Balot");
+      clienteDto.setMail("nicobalot@gmail.com");
+      clienteDto.setTelefono("123456789");
+
 
         Cliente expectedCliente = new Cliente(clienteDto);
         lenient().when(clienteDao.getCliente(12345678L)).thenReturn(expectedCliente);

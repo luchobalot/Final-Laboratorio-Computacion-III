@@ -22,7 +22,7 @@ import ar.edu.utn.frbb.tup.persistence.implementation.ClienteDaoImp;
 
 public class ClienteDaoTest {
 
-    @TempDir // Anotación específica de JUnit 5
+    @TempDir
     Path tempDir;
     
     private ClienteDaoImp clienteDao;
@@ -31,26 +31,25 @@ public class ClienteDaoTest {
     
     @BeforeEach
     void setUp() throws Exception {
-        // Crear archivo JSON temporal
+      
         File file = tempDir.resolve("clientes.json").toFile();
         jsonFilePath = file.getAbsolutePath();
         Files.write(file.toPath(), "[]".getBytes());
         
-        // Inicializar DAO con el archivo temporal
         clienteDao = new ClienteDaoImp();
-        // Setear ruta temporal usando reflexión
+
         java.lang.reflect.Field field = ClienteDaoImp.class.getDeclaredField("JSON_FILE_PATH");
         field.setAccessible(true);
         field.set(null, jsonFilePath);
         
-        // Crear cliente de prueba
+        // Cliente de prueba
         cliente = new Cliente();
-        cliente.setNombre("Juan");
-        cliente.setApellido("Pérez");
+        cliente.setNombre("Luciano");
+        cliente.setApellido("Balot");
         cliente.setDni(12345678);
-        cliente.setFechaNacimiento(LocalDate.of(1990,1,15));
-        cliente.setMail("juan@ejemplo.com");
-        cliente.setTelefono("1122334455");
+        cliente.setFechaNacimiento(LocalDate.of(2002,3,5));
+        cliente.setMail("lucianobalot@ejemplo.com");
+        cliente.setTelefono("2915756380");
     }
     
     @AfterEach
@@ -59,13 +58,11 @@ public class ClienteDaoTest {
     }
     
     @Test
-    @DisplayName("Crear y obtener cliente")
+    @DisplayName("Crear y obtener cliente:")
     void testCreateAndGetCliente() throws ClienteAlreadyExistsException, ClienteNoExisteException {
-        // Act
         Cliente creado = clienteDao.createCliente(cliente);
         Cliente obtenido = clienteDao.getCliente(cliente.getDni());
         
-        // Assert - Usando aserciones de JUnit 5
         assertNotNull(creado);
         assertEquals(cliente.getDni(), creado.getDni());
         
@@ -74,24 +71,21 @@ public class ClienteDaoTest {
     }
     
     @Test
-    @DisplayName("Obtener todos los clientes")
+    @DisplayName("Obtener todos los clientes:")
     void testGetAllClientes() throws ClienteAlreadyExistsException {
-        // Arrange
         clienteDao.createCliente(cliente);
         
         Cliente otroCliente = new Cliente();
-        otroCliente.setNombre("Ana");
+        otroCliente.setNombre("Maria");
         otroCliente.setApellido("García");
-        otroCliente.setDni(87654321);
+        otroCliente.setDni(45789654);
         otroCliente.setFechaNacimiento(LocalDate.of(1985, 5, 20));
-        otroCliente.setMail("ana@ejemplo.com");
-        otroCliente.setTelefono("9988776655");
+        otroCliente.setMail("anagarcia@ejemplo.com");
+        otroCliente.setTelefono("2914568956");
         clienteDao.createCliente(otroCliente);
         
-        // Act
         List<Cliente> clientes = clienteDao.getAllClientes();
         
-        // Assert
         assertEquals(2, clientes.size());
     }
 }
