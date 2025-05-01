@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,11 +32,12 @@ import ar.edu.utn.frbb.tup.persistence.CuentaBancariaDao;
 
 @Repository
 public class CuentaBancariaDaoImp implements CuentaBancariaDao {
+
+    private static final Logger logger = LoggerFactory.getLogger(CuentaBancariaDaoImp.class);
     private static final String JSON_FILE_PATH = "src/main/java/ar/edu/utn/frbb/tup/persistence/resources/cuentasBancarias.json";
     private static final Gson gson = new GsonBuilder()
         .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
         .create();
-
 
     private ClienteDao clienteDao;
 
@@ -47,14 +50,14 @@ public class CuentaBancariaDaoImp implements CuentaBancariaDao {
         try (FileWriter writer = new FileWriter(JSON_FILE_PATH)) {
             gson.toJson(cuentas, writer);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error al guardar cuentas bancarias en JSON", e);
         }
     }
 
     public List<CuentaBancaria> findCuentas() {
         try {
             if (!Files.exists(Paths.get(JSON_FILE_PATH))) {
-                return new ArrayList<>(); // Retorna una lista vacía si el archivo no existe
+                return new ArrayList<>();
             }
 
             try (FileReader reader = new FileReader(JSON_FILE_PATH)) {
@@ -62,8 +65,8 @@ public class CuentaBancariaDaoImp implements CuentaBancariaDao {
                 return gson.fromJson(reader, tipoListaCuentas);
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>(); // Retorna una lista vacía en caso de error  
+            logger.error("Error al leer cuentas bancarias desde JSON", e);
+            return new ArrayList<>();
         }
     }
 
@@ -75,7 +78,7 @@ public class CuentaBancariaDaoImp implements CuentaBancariaDao {
 
     @Override
     public CuentaBancaria getCuentaBancariaById(long id) throws CuentaNoExisteException {
-        // Busca la primera cuenta que coincida con el id 
+        
         List<CuentaBancaria> cuentas = findCuentas();
         return cuentas.stream()
                 .filter(cuenta -> cuenta.getIdCuenta() == id)
