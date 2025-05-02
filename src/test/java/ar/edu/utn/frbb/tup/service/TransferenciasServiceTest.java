@@ -58,10 +58,8 @@ public class TransferenciasServiceTest {
         transferenciasDto.setMonto(-1000.0f);
         transferenciasDto.setMoneda("USD");
 
-        // Verifica que se lanza la excepción cuando las cuentas son iguales
         assertThrows(CuentasIgualesException.class, () -> transferenciasService.crearTransferencia(transferenciasDto));
 
-        // Cambia la cuenta destino y verifica que se lanza excepción por monto negativo
         transferenciasDto.setCuentaDestino(44555666L);
         assertThrows(MontoNoValidoException.class, () -> transferenciasService.crearTransferencia(transferenciasDto));
     }
@@ -84,10 +82,8 @@ public class TransferenciasServiceTest {
 
         Recibo recibo = transferenciasService.crearTransferencia(transferenciasDto);
         
-        // Verifica específicamente que el estado es FALLIDA
         assertEquals(TipoEstadoTransfers.FALLIDA, recibo.getEstado());
         
-        // Verifica que se llamó al método getLimiteSobregiro
         verify(banco).getLimiteSobregiro();
     }
 
@@ -138,12 +134,10 @@ public class TransferenciasServiceTest {
         when(cuentaBancariaDao.getCuentaBancariaById(transferenciasDto.getCuentaDestino())).thenReturn(cuentaDestino);
         when(banco.getLimiteSobregiro()).thenReturn(-100000f);
 
-        // Verifica que se lanza la excepción MonedaNoCoincideException
         Exception exception = assertThrows(MonedaNoCoincideException.class, () -> 
             transferenciasService.crearTransferencia(transferenciasDto)
         );
         
-        // Opcionalmente, puedes verificar el mensaje de la excepción
         assertEquals("La moneda no coincide", exception.getMessage());
     }
 
@@ -169,11 +163,8 @@ public class TransferenciasServiceTest {
         lenient().doNothing().when(transferenciasDao).transferInBank(any(Transferencias.class));
 
         Recibo recibo = transferenciasService.crearTransferencia(transferenciasDto);
-        
-        // Verifica específicamente que el estado es EXITOSA
         assertEquals(TipoEstadoTransfers.EXITOSA, recibo.getEstado());
         
-        // Verifica que se llamaron los métodos necesarios
         verify(banco).getLimiteSobregiro();
         verify(banco).getExitoEnBanco();
     }

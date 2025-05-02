@@ -27,7 +27,7 @@ import ar.edu.utn.frbb.tup.persistence.ClienteDao;
 
 @Repository
 public class ClienteDaoImp implements ClienteDao {
-    private static final String JSON_FILE_PATH = "src/main/java/ar/edu/utn/frbb/tup/persistence/resources/clientes.json";
+    private static String JSON_FILE_PATH = "src/main/java/ar/edu/utn/frbb/tup/persistence/resources/clientes.json";
     private static final Gson gson = new GsonBuilder()
         .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
         .create();

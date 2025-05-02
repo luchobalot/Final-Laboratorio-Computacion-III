@@ -92,6 +92,8 @@ public class TransaccionesServiceTest {
         assertEquals("El saldo sobrepasa el limite de sobregiro", exception.getMessage());
     }
 
+    
+
     @Test
     public void testTransaccionExitosa() throws CuentaNoExisteException, ClienteNoExisteException, MontoNoValidoException, MonedaNoCoincideException {
         TransaccionesDto transaccionesDto = new TransaccionesDto();
