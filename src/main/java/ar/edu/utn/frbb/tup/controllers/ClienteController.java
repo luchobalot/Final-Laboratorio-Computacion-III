@@ -53,7 +53,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<?> crearCliente(@Valid @RequestBody ClienteDto clienteDto) {
         try {
-            clienteValidator.validate(clienteDto); // Validar el ClienteDto
+            clienteValidator.validate(clienteDto);
             Cliente cliente = clienteService.crearCliente(clienteDto);
             return ResponseEntity.status(HttpStatus.CREATED).body(cliente);
         } catch (DataNoValidException e) {
@@ -66,7 +66,7 @@ public class ClienteController {
     @PutMapping("/{dni}")
     public ResponseEntity<?> actualizarCliente(@Valid @PathVariable("dni") long dni, @RequestBody ClienteDto clienteDto) {
         try {
-            clienteValidator.validate(clienteDto); // Validar el ClienteDto
+            clienteValidator.validate(clienteDto);
             Cliente cliente = clienteService.actualizarCliente(dni, clienteDto);
             return ResponseEntity.ok(cliente);
         } catch (DataNoValidException e) {

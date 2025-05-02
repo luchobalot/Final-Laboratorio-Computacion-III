@@ -6,7 +6,6 @@ public class HistorialTransaccionDto {
     private String numeroCuenta;
     private List<TransaccionResumenDto> transacciones;
     
-    // Getters y setters
     public String getNumeroCuenta() {
         return numeroCuenta;
     }

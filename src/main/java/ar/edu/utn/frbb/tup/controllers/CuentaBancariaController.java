@@ -62,8 +62,7 @@ public class CuentaBancariaController {
     }
     
     @PostMapping("/{id}/deposito")
-    public ResponseEntity<?> agregarDeposito(@PathVariable("id") long id, 
-                                          @Valid @RequestBody DepositoRetiroDto depositoRetiroDto) {
+    public ResponseEntity<?> agregarDeposito(@PathVariable("id") long id, @Valid @RequestBody DepositoRetiroDto depositoRetiroDto) {
         try {
             CuentaBancaria cuenta = cuentaBancariaService.agregarDeposito(id, depositoRetiroDto);
             return ResponseEntity.ok(cuenta);
@@ -75,8 +74,7 @@ public class CuentaBancariaController {
     }
     
     @PostMapping("/{id}/retiro")
-    public ResponseEntity<?> agregarRetiro(@PathVariable("id") long id, 
-                                         @Valid @RequestBody DepositoRetiroDto depositoRetiroDto) {
+    public ResponseEntity<?> agregarRetiro(@PathVariable("id") long id, @Valid @RequestBody DepositoRetiroDto depositoRetiroDto) {
         try {
             CuentaBancaria cuenta = cuentaBancariaService.agregarRetiro(id, depositoRetiroDto);
             return ResponseEntity.ok(cuenta);

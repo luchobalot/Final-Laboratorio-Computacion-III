@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public class TransaccionesDto {
-      @NotNull(message = "La cuenta no puede ser nula")
+      @NotNull(message = "La cuenta no puede ser nula.")
       private long idCuenta;
       @NotBlank(message = "El tipo de cuenta no puede ser nula.")
       private String tipo; 

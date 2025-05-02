@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ar.edu.utn.frbb.tup.controllers.dto.HistorialTransaccionDto;
 import ar.edu.utn.frbb.tup.controllers.dto.TransaccionResumenDto;
-import ar.edu.utn.frbb.tup.models.CuentaBancaria;
 import ar.edu.utn.frbb.tup.models.Transacciones;
 import ar.edu.utn.frbb.tup.models.Transferencias;
 import ar.edu.utn.frbb.tup.models.exceptions.CuentaNoExisteException;
@@ -29,7 +28,8 @@ public class HistorialController {
     @GetMapping("/cuenta/{cuentaId}/transacciones")
     public ResponseEntity<?> obtenerHistorialTransacciones(@PathVariable("cuentaId") long cuentaId) {
         try {
-            CuentaBancaria cuenta = cuentaBancariaService.obtenerCuentaPorId(cuentaId);
+            cuentaBancariaService.obtenerCuentaPorId(cuentaId);
+            
             List<Transacciones> transacciones = cuentaBancariaService.obtenerTransaccionesPorId(cuentaId);
             List<Transferencias> transferencias = cuentaBancariaService.obtenerTransferenciasPorId(cuentaId);
             

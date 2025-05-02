@@ -4,22 +4,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Banco {
-    //limite de saldo negativo
+    // Limite de saldo negativo
     private static final float LIMITE_SOBREGIRO = -100000;
 
-    //% comision transferencia
+    // Porcentaje comision transferencia
     private static final float COMISION_TRANSFER_ARS = 0.02f;
     private static final float COMISION_TRANSFER_USD = 0.005f;
 
-    // a partir de cuando se cobra comision
+    // A partir de cuando se cobra comision
     private static final float LIMITE_COMISION_ARS = 1000000;
     private static final float LIMITE_COMISION_USD = 5000;
 
-    //Mensajes de recibo transferencias
-    private static final String EXITO_ENTRE_BANCOS = ("Transferencia entre bancos diferentes exitosa");
-    private static final String EXITO_EN_BANCO = ("Transferencia entre cuentas del mismo banco exitosa");
-    private static final String MENSAJE_ERROR = ("Error del sisteama al realizar la transferencia, intente de nuevo");
-    private static final String ERROR_SALDO_INSUFICIENTE = ("No tiene suficiente saldo");
+    // Mensajes de recibo transferencias
+    private static final String EXITO_ENTRE_BANCOS = ("La transferencia entre diferentes bancos fue exitosa.");
+    private static final String EXITO_EN_BANCO = ("La transferencia en cuentas del mismo banco fue exitosa.");
+    private static final String MENSAJE_ERROR = ("Error del sisteama al realizar la transferencia, por favor, intente de nuevo mas tarde.");
+    private static final String ERROR_SALDO_INSUFICIENTE = ("Error. No tiene suficiente saldo.");
 
     public float getLimiteSobregiro() {
         return LIMITE_SOBREGIRO;

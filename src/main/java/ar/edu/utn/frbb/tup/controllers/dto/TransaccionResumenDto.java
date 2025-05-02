@@ -6,7 +6,6 @@ public class TransaccionResumenDto {
     private String descripcionBreve;
     private float monto;
     
-    // Getters y setters
     public String getFecha() {
         return fecha;
     }
