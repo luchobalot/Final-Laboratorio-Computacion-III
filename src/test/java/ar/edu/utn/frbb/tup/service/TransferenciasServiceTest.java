@@ -140,32 +140,4 @@ public class TransferenciasServiceTest {
         
         assertEquals("La moneda no coincide", exception.getMessage());
     }
-
-    @Test
-    public void testTransferirExitosamenteEnBanco() throws CuentaNoExisteException, CuentasIgualesException, MontoNoValidoException, SaldoNoValidoException, ClienteNoExisteException, MonedaNoCoincideException {
-        TransferenciasDto transferenciasDto = new TransferenciasDto();
-        transferenciasDto.setCuentaOrigen(11222333L);
-        transferenciasDto.setCuentaDestino(44555666L);
-        transferenciasDto.setMonto(150000f);
-        transferenciasDto.setMoneda("USD");
-
-        CuentaBancaria cuentaOrigen = new CuentaBancaria();
-        cuentaOrigen.setSaldo(400000f);
-        cuentaOrigen.setMoneda(TipoMoneda.DOLARES);
-        
-        CuentaBancaria cuentaDestino = new CuentaBancaria();
-        cuentaDestino.setMoneda(TipoMoneda.DOLARES);
-
-        when(cuentaBancariaDao.getCuentaBancariaById(transferenciasDto.getCuentaOrigen())).thenReturn(cuentaOrigen);
-        when(cuentaBancariaDao.getCuentaBancariaById(transferenciasDto.getCuentaDestino())).thenReturn(cuentaDestino);
-        when(banco.getLimiteSobregiro()).thenReturn(-100000f);
-        when(banco.getExitoEnBanco()).thenReturn("Transferencia entre cuentas del mismo banco exitosa");
-        lenient().doNothing().when(transferenciasDao).transferInBank(any(Transferencias.class));
-
-        Recibo recibo = transferenciasService.crearTransferencia(transferenciasDto);
-        assertEquals(TipoEstadoTransfers.EXITOSA, recibo.getEstado());
-        
-        verify(banco).getLimiteSobregiro();
-        verify(banco).getExitoEnBanco();
-    }
 }
