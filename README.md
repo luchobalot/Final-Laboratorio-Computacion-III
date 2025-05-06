@@ -1,4 +1,5 @@
 # API de Transferencias Bancarias
+## Transferencias bancarias
 
 ## 1. Endpoint y Recepción de Datos
 
@@ -84,3 +85,8 @@ El controlador maneja diferentes tipos de errores y sus respectivos códigos HTT
 - `CuentasIgualesException` o `MontoNoValidoException`: Error 400 (Bad Request).
 - `CuentaNoExisteException` o `ClienteNoExisteException`: Error 404 (Not Found).
 - `SaldoNoValidoException` o `MonedaNoCoincideException`: Error 400 (Bad Request).
+
+### Comandos para iniciar proyecto y probar test unitarios:
+./mvnw spring-boot:run
+
+./mvnw test
